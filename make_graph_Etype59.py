@@ -597,22 +597,16 @@ class MyTextGraphDatasetKai5(Dataset):
 
 
 if __name__ == "__main__":
-    from load_datasets_fixPIT2015dev import QQP, PAWS_QQP, PAWS_Wiki, PIT2015, MRPC
+    from load_datasets import QQP, PIT2015, MRPC
 
     # データの準備
-    dataset_names = ["qqp", "pawsqqp", "pawswiki", "pit2015", "mrpc"]
-    dataset_name = dataset_names[4]
+    dataset_names = ["qqp", "pit2015", "mrpc"]
+    dataset_name = dataset_names[2]
     guidelined_tag = ""
 
     if dataset_name == "qqp":
         datasets_folder = "./datasets/"
         dataset_source = QQP(datasets_folder)
-    elif dataset_name == "pawsqqp":
-        datasets_folder = "./datasets/"
-        dataset_source = PAWS_QQP(datasets_folder)
-    elif dataset_name == "pawswiki":
-        datasets_folder = "./datasets/"
-        dataset_source = PAWS_Wiki(datasets_folder)
     elif dataset_name == "pit2015":
         datasets_folder = "./datasets/"
         dataset_source = PIT2015(datasets_folder)

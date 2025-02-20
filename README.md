@@ -28,5 +28,34 @@ conda install ftfy regex tqdm
 ```
 
 
-### other
-coming soon
+### Usage
+1. Make Graph
+Create graph data that expresses the dependency relationships of sentences.
+Given that we will be processing a large amount of data, this time we will save graph data in pickle format and use this for model training, etc.
+Please run the following command
+```
+python make_graph_Etype59plus.py
+```
+or 
+```
+python make_graph_Etype59.py
+```
+Etype59 does not have edges connecting sentence pairs.
+Dataset selection is performed by the index of ```dataset_names[]``` assigned to ```dataset_name```.
+Please move the generated pickle file to the directory "pickle_datas".
+
+2. Training
+We are preparing code to train three types of models. Select any one and execute it.
+For example, if you want to train CombinedModel, run the following command
+```
+python train_combine_rgcn_ly3_PromptEOL_asub_mul.py
+```
+
+3. Test
+We are preparing code to test three types of models. Select any one and execute it.
+For example, if you want to test CombinedModel, run the following command
+```
+python test_combine_rgcn_ly3_PromptEOL_asub_mul.py
+```
+The epoch size etc. will be displayed during the test, but please ignore them.
+Details on how to specify datasets and models will be described later.

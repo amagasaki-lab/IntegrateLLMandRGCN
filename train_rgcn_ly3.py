@@ -13,10 +13,10 @@ from tqdm import tqdm
 
 from rgcn_meta_ly3 import RgcnMetaModelKai2Mod1Ly3
 
-from make_graph_Etype59_fixPIT2015dev import MakeGraphKai5Etype59
-from make_graph_Etype59plus_fixPIT2015dev import MakeGraphKai5Etype59plus, MyTextGraphDatasetKai5
+from make_graph_Etype59 import MakeGraphKai5Etype59
+from make_graph_Etype59plus import MakeGraphKai5Etype59plus, MyTextGraphDatasetKai5
 
-from load_datasets_kai_mod0_fixPIT2015dev import QQP, PAWS_QQP, PAWS_Wiki, PIT2015, MRPC
+from load_datasets_kai_mod0 import QQP, PIT2015, MRPC
 
 import pickle
 from datetime import datetime
@@ -38,12 +38,6 @@ def load_dataset_for_train(variant_model_name, dataset_name, batch_size):
     if dataset_name == "qqp":
         datasets_folder = "./datasets/"
         dataset_source = QQP(datasets_folder)
-    elif dataset_name == "pawsqqp":
-        datasets_folder = "./datasets/"
-        dataset_source = PAWS_QQP(datasets_folder)
-    elif dataset_name == "pawswiki":
-        datasets_folder = "./datasets/"
-        dataset_source = PAWS_Wiki(datasets_folder)
     elif dataset_name == "pit2015":
         datasets_folder = "./datasets/"
         dataset_source = PIT2015(datasets_folder)
@@ -190,7 +184,7 @@ def trainer(device, variant_model_name, aggregation_mode, save_name, dataset_nam
                 tmp_savename = save_name + "_Guidelined_best"
             else:
                 tmp_savename = save_name + "_best"
-            torch.save(model.state_dict(), './output_ablation_models/' +  tmp_savename +'.pth')
+            torch.save(model.state_dict(), './output_models/' +  tmp_savename +'.pth')
             print(f"epoch:{epoch+1} saved {tmp_savename}")
 
 if __name__ == "__main__":
@@ -212,8 +206,8 @@ if __name__ == "__main__":
         "batch_size" : 16,
         "lr" : 1e-4
     }
-    dataset_names = ["qqp", "pawsqqp", "pawswiki", "pit2015", "mrpc"]
-    dataset_name = dataset_names[3]
+    dataset_names = ["qqp", "pit2015", "mrpc"]
+    dataset_name = dataset_names[2]
     
     print("==variant_model_name==")
     print(variant_model_name)

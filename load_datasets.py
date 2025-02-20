@@ -78,7 +78,6 @@ class TsvDataLoaderKai:
         train_labels = [ round(float(d[self.header[2]])) for d in self.data_train ]
         return train_labels
 
-
 # QQP datast is from https://github.com/zhiguowang/BiMPM/tree/master?tab=readme-ov-file which referenced by SBERT-PAS paper.
 class QQP(TsvDataLoaderKai):
     def __init__(self, cnt_dir = './'):
@@ -91,35 +90,6 @@ class QQP(TsvDataLoaderKai):
             },
             infile_header = {"sentence1":1, "sentence2":2, "label":0},
             skip_infile_header = False
-        )
-
-# PAWS-QQP dataset is generated with my PAWS_QQP.ipynb that based https://github.com/google-research-datasets/paws?tab=readme-ov-file
-class PAWS_QQP(TsvDataLoaderKai):
-    def __init__(self, cnt_dir = './'):
-        super().__init__(
-            dataset_name = "PAWS-QQP",
-            data_path_dic = {
-                "train": cnt_dir + "paws_qqp/train.tsv",
-                "dev": cnt_dir + "paws_wiki_labeled_final/dev.tsv", #SBERT-PASに倣い，PAWS-Wikiのdevセットを代用
-                #"dev": cnt_dir + "paws_qqp/dev_and_test.tsv",#
-                "test": cnt_dir + "paws_qqp/dev_and_test.tsv"
-            },
-            infile_header = {"sentence1":1, "sentence2":2, "label":3},
-            skip_infile_header = True
-        )
-
-# PAWS-Wiki datast is from https://github.com/google-research-datasets/paws?tab=readme-ov-file
-class PAWS_Wiki(TsvDataLoaderKai):
-    def __init__(self, cnt_dir = './'):
-        super().__init__(
-            dataset_name = "PAWS-Wiki",
-            data_path_dic = {
-                "train": cnt_dir + "paws_wiki_labeled_final/train.tsv",
-                "dev": cnt_dir + "paws_wiki_labeled_final/dev.tsv",
-                "test": cnt_dir + "paws_wiki_labeled_final/test.tsv"
-            },
-            infile_header = {"sentence1":1, "sentence2":2, "label":3},
-            skip_infile_header = True
         )
 
 # PIT2015 datast is from  https://github.com/cocoxu/SemEval-PIT2015/tree/master
