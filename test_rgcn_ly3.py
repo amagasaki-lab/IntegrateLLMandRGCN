@@ -13,10 +13,10 @@ from tqdm import tqdm
 
 from rgcn_meta_ly3 import RgcnMetaModelKai2Mod1Ly3
 
-from make_graph_Etype59_fixPIT2015dev import MakeGraphKai5Etype59, MyTextGraphDatasetKai5
-from make_graph_Etype59plus_fixPIT2015dev import MakeGraphKai5Etype59plus#, MyTextGraphDatasetKai
+from make_graph_Etype59 import MakeGraphKai5Etype59, MyTextGraphDatasetKai5
+from make_graph_Etype59plus import MakeGraphKai5Etype59plus#, MyTextGraphDatasetKai
 
-from load_datasets_fixPIT2015dev import QQP, PAWS_QQP, PAWS_Wiki, PIT2015, MRPC
+from load_datasets import QQP, PIT2015, MRPC
 
 import pickle
 from datetime import datetime
@@ -41,12 +41,6 @@ def load_dataset_for_test(variant_model_name, dataset_name, batch_size):
     if dataset_name == "qqp":
         datasets_folder = "./datasets/"
         dataset_source = QQP(datasets_folder)
-    elif dataset_name == "pawsqqp":
-        datasets_folder = "./datasets/"
-        dataset_source = PAWS_QQP(datasets_folder)
-    elif dataset_name == "pawswiki":
-        datasets_folder = "./datasets/"
-        dataset_source = PAWS_Wiki(datasets_folder)
     elif dataset_name == "pit2015":
         datasets_folder = "./datasets/"
         dataset_source = PIT2015(datasets_folder)
@@ -99,60 +93,34 @@ def tester(device, variant_model_name, aggregation_mode, dataset_name, hyper_par
         "RgcnMetaKai5Mod1Etype59plusLy3":{
             "mrpc":{
                 "concat-asub":[
-                    "RgcnMetaKai5Mod1Etype59plusLy3_concat-asub_model_trained_mrpc-kai-2025-02-08_15-55-22_best",
-                    "RgcnMetaKai5Mod1Etype59plusLy3_concat-asub_model_trained_mrpc-kai-2025-01-21_10-55-44_best",
-                    "RgcnMetaKai5Mod1Etype59plusLy3_concat-asub_model_trained_mrpc-kai-2025-01-21_10-59-12_best"
                 ]
             },
             "pit2015":{
                 "concat-asub":[
-                    "RgcnMetaKai5Mod1Etype59plusLy3_concat-asub_model_trained_pit2015-kai-2025-02-08_19-09-16_Guidelined_best",
-                    "RgcnMetaKai5Mod1Etype59plusLy3_concat-asub_model_trained_pit2015-kai-2025-01-21_18-24-41_Guidelined_best",
-                    "RgcnMetaKai5Mod1Etype59plusLy3_concat-asub_model_trained_pit2015-kai-2025-01-21_19-00-03_Guidelined_best",
-
-                    "RgcnMetaKai5Mod1Etype59plusLy3_concat-asub_model_trained_pit2015-kai-2025-01-17_05-04-14_best",
-                    "RgcnMetaKai5Mod1Etype59plusLy3_concat-asub_model_trained_pit2015-kai-2025-01-17_05-28-10_best",
-                    "RgcnMetaKai5Mod1Etype59plusLy3_concat-asub_model_trained_pit2015-kai-2025-01-17_05-52-42_best"
                 ]
             },
             "qqp":{
                 "concat-asub":[
-                    "RgcnMetaKai5Mod1Etype59plusLy3_concat-asub_model_trained_qqp-kai-2025-02-07_21-04-50_best",
-                    "RgcnMetaKai5Mod1Etype59plusLy3_concat-asub_model_trained_qqp-kai-2025-01-20_19-04-00_best",
-                    "RgcnMetaKai5Mod1Etype59plusLy3_concat-asub_model_trained_qqp-kai-2025-01-21_01-19-42_best"
                 ]
             }
         },
         "RgcnMetaKai5Mod1Etype59Ly3":{
             "mrpc":{
                 "concat-asub":[
-                    "RgcnMetaKai5Mod1Etype59Ly3_concat-asub_model_trained_mrpc-kai-2025-02-08_16-04-43_best",
-                    "RgcnMetaKai5Mod1Etype59Ly3_concat-asub_model_trained_mrpc-kai-2025-01-21_10-56-27_best",
-                    "RgcnMetaKai5Mod1Etype59Ly3_concat-asub_model_trained_mrpc-kai-2025-01-21_11-00-20_best"
                 ]
             },
             "pit2015":{
                 "concat-asub":[
-                    "RgcnMetaKai5Mod1Etype59Ly3_concat-asub_model_trained_pit2015-kai-2025-02-08_19-16-10_Guidelined_best",
-                    "RgcnMetaKai5Mod1Etype59Ly3_concat-asub_model_trained_pit2015-kai-2025-01-21_18-25-41_Guidelined_best",
-                    "RgcnMetaKai5Mod1Etype59Ly3_concat-asub_model_trained_pit2015-kai-2025-01-21_19-00-39_Guidelined_best",
-
-                    "RgcnMetaKai5Mod1Etype59Ly3_concat-asub_model_trained_pit2015-kai-2025-01-17_05-05-49_best",
-                    "RgcnMetaKai5Mod1Etype59Ly3_concat-asub_model_trained_pit2015-kai-2025-01-17_05-29-32_best",
-                    "RgcnMetaKai5Mod1Etype59Ly3_concat-asub_model_trained_pit2015-kai-2025-01-17_05-53-46_best"
                 ]
             },
             "qqp":{
                 "concat-asub":[
-                    "RgcnMetaKai5Mod1Etype59Ly3_concat-asub_model_trained_qqp-kai-2025-02-07_21-54-11_best",
-                    "RgcnMetaKai5Mod1Etype59Ly3_concat-asub_model_trained_qqp-kai-2025-01-20_19-06-55_best",
-                    "RgcnMetaKai5Mod1Etype59Ly3_concat-asub_model_trained_qqp-kai-2025-01-21_01-20-29_best"
                 ]
             }
         }
     }
     model_name = model_names[variant_model_name][dataset_name][aggregation_mode][num_of_try]
-    model.load_state_dict(torch.load(f"./output_ablation_models/{model_name}.pth"))
+    model.load_state_dict(torch.load(f"./output_models/{model_name}.pth"))
 
     for param in model.parameters():
         param.requires_grad = False
@@ -210,7 +178,7 @@ if __name__ == "__main__":
     print("PyTorch ==", torch.__version__)
     print("CUDA available", torch.cuda.is_available())
     print("CUDA ==", torch.version.cuda)
-    device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     variant_model_names = [
         "RgcnMetaKai5Mod1Etype59plusLy3",#========Etype59plus[0]
@@ -225,8 +193,8 @@ if __name__ == "__main__":
         "batch_size" : 16,
         "lr" : 1e-4
     }
-    dataset_names = ["qqp", "pawsqqp", "pawswiki", "pit2015", "mrpc"]
-    dataset_name = dataset_names[3]
+    dataset_names = ["qqp", "pit2015", "mrpc"]
+    dataset_name = dataset_names[2]
     
     print("==variant_model_name==")
     print(variant_model_name)

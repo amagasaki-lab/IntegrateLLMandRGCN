@@ -13,10 +13,10 @@ from tqdm import tqdm
 
 from combine_rgcn_ly3_PromptEOL_asub_mul import CombineRgcnLy3DividePoolPromptEolModel
 
-from make_graph_Etype59_fixPIT2015dev import MakeGraphKai5Etype59, MyTextGraphDatasetKai5
-from make_graph_Etype59plus_fixPIT2015dev import MakeGraphKai5Etype59plus#, MyTextGraphDatasetKai
+from make_graph_Etype59 import MakeGraphKai5Etype59, MyTextGraphDatasetKai5
+from make_graph_Etype59plus import MakeGraphKai5Etype59plus#, MyTextGraphDatasetKai
 
-from load_datasets_fixPIT2015dev import QQP, PAWS_QQP, PAWS_Wiki, PIT2015, MRPC
+from load_datasets import QQP, PIT2015, MRPC
 
 import pickle
 from datetime import datetime
@@ -41,12 +41,6 @@ def load_dataset_for_test(variant_model_name, dataset_name, batch_size):
     if dataset_name == "qqp":
         datasets_folder = "./datasets/"
         dataset_source = QQP(datasets_folder)
-    elif dataset_name == "pawsqqp":
-        datasets_folder = "./datasets/"
-        dataset_source = PAWS_QQP(datasets_folder)
-    elif dataset_name == "pawswiki":
-        datasets_folder = "./datasets/"
-        dataset_source = PAWS_Wiki(datasets_folder)
     elif dataset_name == "pit2015":
         datasets_folder = "./datasets/"
         dataset_source = PIT2015(datasets_folder)
@@ -82,7 +76,6 @@ def load_dataset_for_test(variant_model_name, dataset_name, batch_size):
 
     return graph_data_maker, dataset_source, test_loader
 
-
 def tester(device, variant_model_name, aggregation_mode, dataset_name, hyper_params, base_model_name, num_of_try):
     epoch_size = hyper_params["epoch_size"]
     batch_size = hyper_params["batch_size"]
@@ -98,27 +91,15 @@ def tester(device, variant_model_name, aggregation_mode, dataset_name, hyper_par
             "opt-2.7b":{
                 "mrpc":{
                     "concat-asub":[
-                        "CombineRgcnEtype59plusKai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_mrpc-kai-2025-02-08_12-04-29_best",
-                        "CombineRgcnEtype59plusKai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_mrpc-kai-2025-01-20_13-37-56_best",
-                        "CombineRgcnEtype59plusKai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_mrpc-kai-2025-01-20_13-59-05_best"
+                        "CombineRgcnEtype59plusKai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_mrpc-kai-2025-02-20_16-08-24_best"
                     ]
                 },
                 "pit2015":{
                     "concat-asub":[
-                        "CombineRgcnEtype59plusKai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_pit2015-kai-2025-02-08_16-20-58_Guidelined_best",
-                        "CombineRgcnEtype59plusKai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_pit2015-kai-2025-01-21_15-58-30_Guidelined_best",
-                        "CombineRgcnEtype59plusKai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_pit2015-kai-2025-01-21_16-51-43_Guidelined_best",
-
-                        "CombineRgcnEtype59plusKai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_pit2015-kai-2025-01-17_04-45-32_best",
-                        "CombineRgcnEtype59plusKai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_pit2015-kai-2025-01-17_05-54-49_best",
-                        "CombineRgcnEtype59plusKai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_pit2015-kai-2025-01-17_06-56-55_best"
                     ]
                 },
                 "qqp":{
                     "concat-asub":[
-                        "CombineRgcnEtype59plusKai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_qqp-kai-2025-01-23_20-43-50_best",
-                        "CombineRgcnEtype59plusKai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_qqp-kai-2025-01-17_11-21-17_best",
-                        "CombineRgcnEtype59plusKai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_qqp-kai-2025-01-18_19-56-13_best"
                     ]
                 }
             }
@@ -127,34 +108,21 @@ def tester(device, variant_model_name, aggregation_mode, dataset_name, hyper_par
             "opt-2.7b":{
                 "mrpc":{
                     "concat-asub":[
-                        "CombineRgcnEtype59Kai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_mrpc-kai-2025-02-08_15-17-30_best",
-                        "CombineRgcnEtype59Kai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_mrpc-kai-2025-01-20_15-12-11_best",
-                        "CombineRgcnEtype59Kai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_mrpc-kai-2025-01-20_15-12-52_best"
                     ]
                 },
                 "pit2015":{
                     "concat-asub":[
-                        "CombineRgcnEtype59Kai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_pit2015-kai-2025-02-08_18-51-16_Guidelined_best",
-                        "CombineRgcnEtype59Kai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_pit2015-kai-2025-01-22_00-56-19_Guidelined_best",
-                        "CombineRgcnEtype59Kai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_pit2015-kai-2025-01-22_01-49-13_Guidelined_best",
-
-                        "CombineRgcnEtype59Kai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_pit2015-kai-2025-01-17_04-49-58_best",
-                        "CombineRgcnEtype59Kai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_pit2015-kai-2025-01-17_06-00-07_best",
-                        "CombineRgcnEtype59Kai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_pit2015-kai-2025-01-17_07-01-05_best"
                     ]
                 },
                 "qqp":{
                     "concat-asub":[
-                        "CombineRgcnEtype59Kai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_qqp-kai-2025-01-23_20-39-55_best",
-                        "CombineRgcnEtype59Kai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_qqp-kai-2025-01-17_11-21-52_best",
-                        "CombineRgcnEtype59Kai5Ly3DividePoolPromptEolModelAsubMul_opt-2.7b_concat-asub_model_trained_qqp-kai-2025-01-18_19-52-03_best"
                     ]
                 }
             }
         }
     }
     model_name = model_names[variant_model_name][base_model_name][dataset_name][aggregation_mode][num_of_try]
-    model.load_state_dict(torch.load(f"./output_ablation_models/{model_name}.pth"))
+    model.load_state_dict(torch.load(f"./output_models/{model_name}.pth"))
 
     for param in model.parameters():
         param.requires_grad = False
@@ -212,13 +180,13 @@ if __name__ == "__main__":
     print("PyTorch ==", torch.__version__)
     print("CUDA available", torch.cuda.is_available())
     print("CUDA ==", torch.version.cuda)
-    device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     variant_model_names = [
         "CombineRgcnEtype59plusKai5Ly3DividePoolPromptEolModelAsubMul",#========Etype59plus[0]
         "CombineRgcnEtype59Kai5Ly3DividePoolPromptEolModelAsubMul",#============Etype59    [1]
     ]
-    variant_model_name = variant_model_names[1]
+    variant_model_name = variant_model_names[0]
     base_model_names = [
         "opt-2.7b",
         "opt-1.3b"
@@ -232,8 +200,8 @@ if __name__ == "__main__":
         "batch_size" : 16,
         "lr" : 1e-4
     }
-    dataset_names = ["qqp", "pawsqqp", "pawswiki", "pit2015", "mrpc"]
-    dataset_name = dataset_names[3]
+    dataset_names = ["qqp", "pit2015", "mrpc"]
+    dataset_name = dataset_names[2]
     
     print("==variant_model_name==")
     print(variant_model_name)

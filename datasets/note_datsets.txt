@@ -1,1 +1,1 @@
-Place the tsv files for datasets such as “QQP” and “PIT2015” in this folder
+Place the tsv files for datasets such as “QQP” and “PIT2015” in this directory.
