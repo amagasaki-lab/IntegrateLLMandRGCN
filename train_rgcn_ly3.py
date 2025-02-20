@@ -197,7 +197,7 @@ if __name__ == "__main__":
     print("PyTorch ==", torch.__version__)
     print("CUDA available", torch.cuda.is_available())
     print("CUDA ==", torch.version.cuda)
-    device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     variant_model_names = [
         "RgcnMetaKai5Mod1Etype59plusLy3",#========Etype59plus[0]

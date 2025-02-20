@@ -218,7 +218,7 @@ class MakeGraphKai5Etype59:
         tmp_sentence = tmp_sentence.replace("'ve", "have")
 
         tmp_sentence = tmp_sentence.replace("n't", " not")
-        tmp_sentence = tmp_sentence.replace(" nt ", " not ")# kai4-2（2025/01/15の朝以降のモデル）
+        tmp_sentence = tmp_sentence.replace(" nt ", " not ")
         tmp_sentence = tmp_sentence.replace("  ", " ")# 再度スペースが2回続く箇所を削除
 
         # Latexの数式の除去
@@ -597,11 +597,12 @@ class MyTextGraphDatasetKai5(Dataset):
 
 
 if __name__ == "__main__":
-    from load_datasets_kai_mod0_fixPIT2015dev import QQP, PAWS_QQP, PAWS_Wiki, PIT2015, MRPC
+    from load_datasets_fixPIT2015dev import QQP, PAWS_QQP, PAWS_Wiki, PIT2015, MRPC
 
     # データの準備
     dataset_names = ["qqp", "pawsqqp", "pawswiki", "pit2015", "mrpc"]
-    dataset_name = dataset_names[3]
+    dataset_name = dataset_names[4]
+    guidelined_tag = ""
 
     if dataset_name == "qqp":
         datasets_folder = "./datasets/"
@@ -615,6 +616,7 @@ if __name__ == "__main__":
     elif dataset_name == "pit2015":
         datasets_folder = "./datasets/"
         dataset_source = PIT2015(datasets_folder)
+        guidelined_tag = "_Guidelined"
     elif dataset_name == "mrpc":
         datasets_folder = ""
         dataset_source = MRPC(datasets_folder)
@@ -637,8 +639,8 @@ if __name__ == "__main__":
     else:
         L_flag = "L-"
     
-    #dataset_train = graph_data_maker.trans_dataset_kai_type2(dataset["train"], header, f"{dataset_name}-Etype59-kai5-{L_flag}train")
-    dataset_validation = graph_data_maker.trans_dataset_kai_type2(dataset["validation"], header, f"{dataset_name}-Etype59-kai5-{L_flag}validation_Guidelined")
-    #dataset_test = graph_data_maker.trans_dataset_kai_type2(dataset["test"], header, f"{dataset_name}-Etype59-kai5-{L_flag}test")
+    dataset_train = graph_data_maker.trans_dataset_kai_type2(dataset["train"], header, f"{dataset_name}-Etype59-kai5-{L_flag}train")
+    dataset_validation = graph_data_maker.trans_dataset_kai_type2(dataset["validation"], header, f"{dataset_name}-Etype59-kai5-{L_flag}validation{guidelined_tag}")
+    dataset_test = graph_data_maker.trans_dataset_kai_type2(dataset["test"], header, f"{dataset_name}-Etype59-kai5-{L_flag}test")
 
     print("FINISH!!!")

@@ -201,13 +201,13 @@ if __name__ == "__main__":
     print("PyTorch ==", torch.__version__)
     print("CUDA available", torch.cuda.is_available())
     print("CUDA ==", torch.version.cuda)
-    device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     variant_model_names = [
         "CombineRgcnEtype59plusKai5Ly3DividePoolPromptEolModelAsubMul",#========Etype59plus[0]
         "CombineRgcnEtype59Kai5Ly3DividePoolPromptEolModelAsubMul",#============Etype59    [1]
     ]
-    variant_model_name = variant_model_names[1]
+    variant_model_name = variant_model_names[0]
     base_model_names = [
         "opt-2.7b",
         "opt-1.3b"
@@ -222,7 +222,7 @@ if __name__ == "__main__":
         "lr" : 1e-4
     }
     dataset_names = ["qqp", "pawsqqp", "pawswiki", "pit2015", "mrpc"]
-    dataset_name = dataset_names[3]
+    dataset_name = dataset_names[4]
     
     print("==variant_model_name==")
     print(variant_model_name)
