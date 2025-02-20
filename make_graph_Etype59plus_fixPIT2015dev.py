@@ -317,7 +317,8 @@ class MakeGraphKai5Etype59plus:
                 deficit_list.append(True)
                 if self.sumple_img_flag > 0:
                     self.sumple_img_flag -= 1
-                    self.__plot_sentence_graph(sentence, self.tokenized_by_spacy, edge_index, len(doc1), save_name)# グラフを画像で保存
+                    # 作成されたグラフを画像で確認する場合に使用．その際は，画像の保存先のディレクトリを事前に作成すべし
+                    #self.__plot_sentence_graph(sentence, self.tokenized_by_spacy, edge_index, len(doc1), save_name)# グラフを画像で保存
 
                 if sample_print:
                     sample_print = False

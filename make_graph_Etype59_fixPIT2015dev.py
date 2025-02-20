@@ -262,22 +262,7 @@ class MakeGraphKai5Etype59:
                         edges.append((token.i, child.i))
                         tmp_edge_type.append(dep_num)
 
-                # 共通単語のエッジを追加
-                '''
-                if ti >= len(doc1) and token.text in list(tmp_tokenized.keys()): # 既に出現済みの単語の場合，共起と判断しエッジを追加
-                    for exited_word_i in tmp_tokenized[token.text]:
-                        edges.append((exited_word_i, token.i))
-                        tmp_edge_type.append(len(self.deprel_59))# 係り受け関係の総数+1を「共起」の関係に設定
-
-                        edges.append((token.i, exited_word_i))#双方向とするため，入れ替えたものも追加？
-                        tmp_edge_type.append(len(self.deprel_59))# 係り受け関係の総数+1を「共起」の関係に設定
-
-                elif ti < len(doc1):#文内では繋がないよう，既出のエッジの追加は1文目のみで行う
-                    if  token.text in list(tmp_tokenized.keys()):
-                        tmp_tokenized[token.text].append(token.i)
-                    else:
-                        tmp_tokenized[token.text] = [token.i]
-                '''
+                # 共通単語のエッジを追加しない
 
                 self.tokenized_by_spacy.append(token.text)
                 
@@ -318,7 +303,8 @@ class MakeGraphKai5Etype59:
                 deficit_list.append(True)
                 if self.sumple_img_flag > 0:
                     self.sumple_img_flag -= 1
-                    self.__plot_sentence_graph(sentence, self.tokenized_by_spacy, edge_index, len(doc1), save_name)# グラフを画像で保存
+                    # 作成されたグラフを画像で確認する場合に使用．その際は，画像の保存先のディレクトリを事前に作成すべし
+                    #self.__plot_sentence_graph(sentence, self.tokenized_by_spacy, edge_index, len(doc1), save_name)# グラフを画像で保存
 
                 if sample_print:
                     sample_print = False
